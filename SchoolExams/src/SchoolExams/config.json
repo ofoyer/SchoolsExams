@@ -1,0 +1,6 @@
+{
+  "connectionStrings": {
+    "SchoolExamsConnectionString": "Source=(localdb)\\\\MSSQLLocalDB;Database=SchoolExams;Trusted_Connection=true;MultiSubnetFailover=true"
+
+  }
+}
