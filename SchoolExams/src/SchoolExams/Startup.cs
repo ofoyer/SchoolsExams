@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Serialization;
 using SchoolExams.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SchoolExams
 {
@@ -37,6 +39,28 @@ namespace SchoolExams
             services.AddLogging();
             services.AddDbContext<SchoolsContext>();
 
+            services.AddIdentity<SchoolUser, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Cookies.ApplicationCookie.LoginPath = "/auth/login";
+                config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents()
+                {
+                    OnRedirectToLogin = async ctx =>
+                    {
+                        if (ctx.Request.Path.StartsWithSegments("/api") &&
+                          ctx.Response.StatusCode == 200)
+                        {
+                            ctx.Response.StatusCode = 401;
+                        }
+                        else
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+                        await Task.Yield();
+                    }
+                };
+            })
+      .AddEntityFrameworkStores<SchoolsContext>();
             services.AddMvc()
                     .AddJsonOptions(config =>
                                     {
@@ -58,7 +82,7 @@ namespace SchoolExams
 
 
             app.UseStaticFiles();
-
+            app.UseIdentity();
 
             app.UseMvc(config =>
             {

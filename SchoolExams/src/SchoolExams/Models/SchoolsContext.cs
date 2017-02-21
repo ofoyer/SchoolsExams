@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolExams.Models
 {
-    public class SchoolsContext: DbContext
+    public class SchoolsContext: IdentityDbContext<SchoolUser>
     {
         private IConfigurationRoot _config;
 
