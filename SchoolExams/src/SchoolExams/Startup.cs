@@ -36,7 +36,6 @@ namespace SchoolExams
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(_config);
-            services.AddLogging();
             services.AddDbContext<SchoolsContext>();
 
             services.AddIdentity<SchoolUser, IdentityRole>(config =>
@@ -60,7 +59,12 @@ namespace SchoolExams
                     }
                 };
             })
-      .AddEntityFrameworkStores<SchoolsContext>();
+            .AddEntityFrameworkStores<SchoolsContext>();
+
+            services.AddLogging();
+
+            services.AddTransient<SchoolsContextSeedData>();
+
             services.AddMvc()
                     .AddJsonOptions(config =>
                                     {
@@ -70,9 +74,12 @@ namespace SchoolExams
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app,
+            IHostingEnvironment env, 
+            ILoggerFactory loggerFactory,
+            SchoolsContextSeedData seeder)
         {
-            
+
 
             if (env.IsDevelopment())
             {
@@ -92,8 +99,10 @@ namespace SchoolExams
                     defaults: new { controller = "Home", action = "Index" }
 
                     );
-            }); 
-            
+            });
+
+            seeder.EnsureSeedData().Wait();
+
         }
     }
 }
