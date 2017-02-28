@@ -22,6 +22,8 @@ namespace SchoolExams.Models
         public DbSet<City> Cities { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Questionary> Questionaries { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
