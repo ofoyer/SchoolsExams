@@ -53,6 +53,87 @@ namespace SchoolExams.Models
 
                 _context.Cities.AddRange(cities);
 
+                var school = new School()
+                {
+                    DateCreated = DateTime.Now,
+                    SchoolCity = new City() { CityName = "לוד" },
+                    SchoolName = "חורב-בנים",
+                    SchoolCode = "203283",
+                    Subjects = new List<Subject>()
+                    {
+                       new Subject() {
+                           DateCreated = DateTime.Now,
+                           SubjectName ="English",
+                           Questionaries = new List<Questionary>()
+                           {
+                               new Questionary() {QuestName = "016207-2017S1",
+                                   Exams = new  List<Exam>() {
+                                      new Exam() {ExamName = "0162017-2017S1-A1",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "0162017-2017S1-A2",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "0162017-2017S1-A3",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "0162017-2017S1-A4",DateCreated = DateTime.Now }
+                                      }
+                               },
+                               new Questionary() { QuestName = "016207-2017S2",
+                                   Exams = new  List<Exam>() {
+                                      new Exam() {ExamName = "0162017-2017S2-A1",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "0162017-2017S2-A2",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "0162017-2017S2-A3",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "0162017-2017S2-A4",DateCreated = DateTime.Now }
+                                      }
+                               }
+
+                           }
+
+
+                       },
+                       new Subject() {
+                           DateCreated = DateTime.Now,
+                           SubjectName ="Matemathic",
+                           Questionaries = new List<Questionary>()
+                           {
+                               new Questionary() {QuestName = "217054-2017S1",
+                                   Exams = new  List<Exam>() {
+                                      new Exam() {ExamName = "217054-2017S1-A1",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "217054-2017S1-A2",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "217054-2017S1-A3",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "217054-2017S1-A4",DateCreated = DateTime.Now }
+                                      }
+                               },
+                               new Questionary() { QuestName = "217054-2017S2",
+                                   Exams = new  List<Exam>() {
+                                      new Exam() {ExamName = "217054-2017S2-A1",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "217054-2017S2-A2",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "217054-2017S2-A3",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "217054-2017S2-A4",DateCreated = DateTime.Now }
+                                      }
+                               },
+                              new Questionary() { QuestName = "217054-2017W",
+                                   Exams = new  List<Exam>() {
+                                      new Exam() {ExamName = "217054-2017W-A1",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "217054-2017W-A2",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "217054-2017W-A3",DateCreated = DateTime.Now },
+                                      new Exam() {ExamName = "217054-2017W-A4",DateCreated = DateTime.Now }
+                                      }
+                               }
+
+                           }
+
+
+                       }
+
+                    }
+
+
+                };
+
+                _context.Schools.Add(school);
+
+                _context.Cities.Add(school.SchoolCity);
+
+                _context.Subjects.AddRange(school.Subjects);
+
+               // _context.Questionaries.AddRange(school.Subjects.)
                 await _context.SaveChangesAsync();
 
             }
