@@ -8,9 +8,10 @@ using SchoolExams.Models;
 namespace SchoolExams.Migrations
 {
     [DbContext(typeof(SchoolsContext))]
-    partial class SchoolsContextModelSnapshot : ModelSnapshot
+    [Migration("20170301063118_AddingUserNameToSchoolTable")]
+    partial class AddingUserNameToSchoolTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
