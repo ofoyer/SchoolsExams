@@ -1,0 +1,23 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   SchoolExams/src/SchoolExams/Models/ISchoolsRepository.cs
+#	modified:   SchoolExams/src/SchoolExams/Models/SchoolsContextSeedData.cs
+#	modified:   SchoolExams/src/SchoolExams/Models/SchoolsRepository.cs
+#
+# Untracked files:
+#	SchoolExams/src/SchoolExams/Controllers/CityController.cs
+#	SchoolExams/src/SchoolExams/Controllers/ExamController.cs
+#	SchoolExams/src/SchoolExams/Controllers/QuestionaryController.cs
+#	SchoolExams/src/SchoolExams/Controllers/SubjectController.cs
+#	SchoolExams/src/SchoolExams/ISchoolRepository.cs
+#	SchoolExams/src/SchoolExams/ViewModels/CityViewModel.cs
+#	SchoolExams/src/SchoolExams/ViewModels/ExamViewModel.cs
+#	SchoolExams/src/SchoolExams/ViewModels/QuestionaryViewModel.cs
+#	SchoolExams/src/SchoolExams/ViewModels/SubjectViewModel.cs
+#
+

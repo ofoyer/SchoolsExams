@@ -9,9 +9,14 @@ namespace SchoolExams.Models
     public interface ISchoolsRepository
     {
         IEnumerable<School> GetAllSchools();
+        IEnumerable<Subject> GetAllSubjects();
+        IEnumerable<City> GetAllCities();
+        IEnumerable<Questionary> GetAllQuestionaries();
+        IEnumerable<Exam> GetAllExams();
         School GetSchoolByName(string school, string userName);
         void AddSchool(School school);
-        void AddSubject(string schoolName, string userName, Subject subject);
+        void AddSubjectBySchool(string schoolName, string userName, Subject subject);
+        void AddSubject(Subject subject);
         void AddCity(City city);
         void AddQuestionary(Questionary questionary);
         void AddExam(Exam exam);

@@ -131,18 +131,18 @@ namespace SchoolExams.Models
 
                 _context.Schools.Add(school);
 
-                _context.Cities.Add(school.SchoolCity);
+                //_context.Cities.Add(school.SchoolCity);
 
-                _context.Subjects.AddRange(school.Subjects);
+                //_context.Subjects.AddRange(school.Subjects);
 
-                foreach(var item in school.Subjects)
-                {
-                    _context.Questionaries.AddRange(item.Questionaries);
-                    foreach (var quest in item.Questionaries)
-                    {
-                        _context.Exams.AddRange(quest.Exams);
-                    }
-                }
+                //foreach(var item in school.Subjects)
+                //{
+                //    _context.Questionaries.AddRange(item.Questionaries);
+                //    foreach (var quest in item.Questionaries)
+                //    {
+                //        _context.Exams.AddRange(quest.Exams);
+                //    }
+                //}
 
 
                 var schoolB = new School()
@@ -221,18 +221,18 @@ namespace SchoolExams.Models
 
                 _context.Schools.Add(schoolB);
 
-                _context.Cities.Add(schoolB.SchoolCity);
+                //_context.Cities.Add(schoolB.SchoolCity);
 
-                _context.Subjects.AddRange(schoolB.Subjects);
+                //_context.Subjects.AddRange(schoolB.Subjects);
 
-                foreach (var item in schoolB.Subjects)
-                {
-                    _context.Questionaries.AddRange(item.Questionaries);
-                    foreach (var quest in item.Questionaries)
-                    {
-                        _context.Exams.AddRange(quest.Exams);
-                    }
-                }
+                //foreach (var item in schoolB.Subjects)
+                //{
+                //    _context.Questionaries.AddRange(item.Questionaries);
+                //    foreach (var quest in item.Questionaries)
+                //    {
+                //        _context.Exams.AddRange(quest.Exams);
+                //    }
+                //}
 
 
                 var schoolC = new School()
@@ -311,18 +311,18 @@ namespace SchoolExams.Models
 
                 _context.Schools.Add(schoolC);
 
-                _context.Cities.Add(schoolC.SchoolCity);
+                //_context.Cities.Add(schoolC.SchoolCity);
 
-                _context.Subjects.AddRange(schoolC.Subjects);
+                //_context.Subjects.AddRange(schoolC.Subjects);
 
-                foreach (var item in schoolC.Subjects)
-                {
-                    _context.Questionaries.AddRange(item.Questionaries);
-                    foreach (var quest in item.Questionaries)
-                    {
-                        _context.Exams.AddRange(quest.Exams);
-                    }
-                }
+                //foreach (var item in schoolC.Subjects)
+                //{
+                //    _context.Questionaries.AddRange(item.Questionaries);
+                //    foreach (var quest in item.Questionaries)
+                //    {
+                //        _context.Exams.AddRange(quest.Exams);
+                //    }
+                //}
 
 
                 await _context.SaveChangesAsync();
