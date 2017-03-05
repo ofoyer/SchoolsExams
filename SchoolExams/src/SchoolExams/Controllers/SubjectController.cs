@@ -48,22 +48,24 @@ namespace SchoolExams.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]SubjectViewModel subject)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                    // Save to the Database
-                    var newSubject = Mapper.Map<Subject>(subject);
+                // Save to the Database
+                var newSubject = Mapper.Map<Subject>(subject);
 
-                    _repository.AddSubject(newSubject);
+                _repository.AddSubject(newSubject);
 
-                    if (await _repository.SaveChangesAsync())
-                    {
-                        return Created($"api/subjects/{subject.SubjectName}", Mapper.Map<SubjectViewModel>(subject));
-                    }
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Created($"api/subjects/{subject.SubjectName}", Mapper.Map<SubjectViewModel>(subject));
+                }
 
             }
 
             return BadRequest("Failed to save the subject");
 
         }
+
+        
     }
 }

@@ -40,13 +40,18 @@ namespace SchoolExams.Models
             _context.Add(school);
         }
 
-        public void AddSubjectBySchool(string schoolName, string userName, Subject subject)
+        public void AddSubjectBySchool(string schoolName, string userName, IEnumerable<Subject> subjects)
         {
             var school = GetSchoolByName(schoolName, userName);
-            if(school != null)
-                school.Subjects.Add(subject);
+            if (school != null)
+                school.Subjects.ToList().AddRange(subjects);
+        }
+        public Object GetSchoolById(int id)
+        {
+            return _context.Schools.FirstOrDefault(t => t.id == id);
 
         }
+
         public IEnumerable<Subject> GetAllSubjects()
         {
             return _context.Subjects.ToList();
