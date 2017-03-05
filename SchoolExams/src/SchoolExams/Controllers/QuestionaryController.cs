@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SchoolExams.Filters;
 using SchoolExams.Models;
 using SchoolExams.ViewModels;
 using System;
@@ -10,7 +11,9 @@ using System.Threading.Tasks;
 
 namespace SchoolExams.Controllers
 {
-    public class QuestionaryController:Controller
+    [Route("api/[controller]")]
+    [ValidateModel]
+    public class QuestionaryController : Controller
     {
         private ILogger<QuestionaryController> _logger;
         private ISchoolsRepository _repository;
@@ -33,7 +36,7 @@ namespace SchoolExams.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to get All Subject: {ex}");
+                _logger.LogError($"Failed to get All Questionaries: {ex}");
 
                 return BadRequest("Error occurred");
             }
@@ -45,9 +48,10 @@ namespace SchoolExams.Controllers
         public async Task<IActionResult> Post([FromBody]QuestionaryViewModel questionary)
         {
 
-            if (ModelState.IsValid)
+
+            // Save to the Database
+            try
             {
-                // Save to the Database
                 var newQuestionary = Mapper.Map<Questionary>(questionary);
 
                 _repository.AddQuestionary(newQuestionary);
@@ -56,10 +60,20 @@ namespace SchoolExams.Controllers
                 {
                     return Created($"api/questionaries/{questionary.QuestName}", Mapper.Map<QuestionaryViewModel>(questionary));
                 }
+                else
+                {
+                    _logger.LogWarning("Could not save questionary to the database");
+                }
+            }
+            catch (Exception ex)
+            {
 
+                _logger.LogError($"Threw exception while saving questionary: {ex}");
             }
 
-            return BadRequest("Failed to save the city");
+
+
+            return BadRequest("Failed to save the questionary");
 
 
         }

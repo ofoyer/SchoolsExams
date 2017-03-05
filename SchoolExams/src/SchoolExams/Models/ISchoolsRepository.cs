@@ -15,7 +15,10 @@ namespace SchoolExams.Models
         IEnumerable<Exam> GetAllExams();
         School GetSchoolByName(string school, string userName);
         void AddSchool(School school);
-        void AddSubjectBySchool(string schoolName, string userName, ICollection<Subject> subject);
+
+        void AddSubjectBySchool(string schoolName, string userName, IEnumerable<Subject> subjects);
+
+        Object GetSchoolByID(int id);
         void AddSubject(Subject subject);
         void AddCity(City city);
         void AddQuestionary(Questionary questionary);
@@ -23,6 +26,5 @@ namespace SchoolExams.Models
         IEnumerable<Exam> GetExamsByQuestName(string questName);
         Task<bool> SaveChangesAsync();
         Object GetSchoolsByUserName(string userName);
-        Object GetSchoolByID(int schoolid);
     }
 }

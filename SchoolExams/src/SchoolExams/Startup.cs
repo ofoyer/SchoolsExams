@@ -12,6 +12,8 @@ using Newtonsoft.Json.Serialization;
 using SchoolExams.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using AutoMapper;
+using SchoolExams.ViewModels;
 
 namespace SchoolExams
 {
@@ -79,7 +81,14 @@ namespace SchoolExams
             ILoggerFactory loggerFactory,
             SchoolsContextSeedData seeder)
         {
-
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<SchoolViewModel, School>().ReverseMap();
+                config.CreateMap<SubjectViewModel, Subject>().ReverseMap();
+                config.CreateMap<QuestionaryViewModel, Questionary>().ReverseMap();
+                config.CreateMap<ExamViewModel, Exam>().ReverseMap();
+                config.CreateMap<CityViewModel, City>().ReverseMap();
+            });
 
             if (env.IsDevelopment())
             {

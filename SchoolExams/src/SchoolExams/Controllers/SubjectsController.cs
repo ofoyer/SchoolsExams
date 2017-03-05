@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
+using SchoolExams.Filters;
 using SchoolExams.Models;
 using SchoolExams.ViewModels;
 using System;
@@ -13,14 +14,15 @@ using System.Threading.Tasks;
 namespace SchoolExams.Controllers
 {
 
-    [Route("api/subjects")]
+    [Route("api/[controller]")]
     [Authorize]
-    public class SubjectController : Controller
+    [ValidateModel]
+    public class SubjectsController : Controller
     {
-        private ILogger<SubjectController> _logger;
+        private ILogger<SubjectsController> _logger;
         private ISchoolsRepository _repository;
 
-        public SubjectController(ISchoolsRepository repository, ILogger<SubjectController> logger)
+        public SubjectsController(ISchoolsRepository repository, ILogger<SubjectsController> logger)
         {
             _repository = repository;
             _logger = logger;

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SchoolExams.Filters;
 using SchoolExams.Models;
 using SchoolExams.ViewModels;
 using System;
@@ -10,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace SchoolExams.Controllers
 {
+
+    [Route("api/[controller]")]
+    [ValidateModel]
     public class ExamController:Controller
     {
         private ILogger<CityController> _logger;
@@ -45,9 +49,10 @@ namespace SchoolExams.Controllers
         public async Task<IActionResult> Post([FromBody]ExamViewModel exam)
         {
 
-            if (ModelState.IsValid)
+
+            // Save to the Database
+            try
             {
-                // Save to the Database
                 var newExam = Mapper.Map<Exam>(exam);
 
                 _repository.AddExam(newExam);
@@ -56,10 +61,20 @@ namespace SchoolExams.Controllers
                 {
                     return Created($"api/exams/{exam.ExamName}", Mapper.Map<ExamViewModel>(exam));
                 }
+                else
+                {
+                    _logger.LogWarning("Could not save exam to the database");
+                }
+            }
+            catch (Exception ex)
+            {
 
+                _logger.LogError($"Threw exception while saving exam: {ex}");
             }
 
-            return BadRequest("Failed to save the city");
+            
+
+            return BadRequest("Failed to save the exam");
 
 
         }

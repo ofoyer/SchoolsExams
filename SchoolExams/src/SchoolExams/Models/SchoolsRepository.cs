@@ -46,7 +46,8 @@ namespace SchoolExams.Models
             if (school != null)
                 school.Subjects.ToList().AddRange(subjects);
         }
-        public Object GetSchoolById(int id)
+
+        public Object GetSchoolByID(int id)
         {
             return _context.Schools.FirstOrDefault(t => t.id == id);
 
