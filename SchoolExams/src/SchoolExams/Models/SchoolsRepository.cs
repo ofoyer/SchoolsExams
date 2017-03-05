@@ -23,7 +23,12 @@ namespace SchoolExams.Models
         {
             _logger.LogInformation("Getting All Schools From Database");
 
-            return _context.Schools.ToList();
+            return _context.Schools
+                .Include(x => x.SchoolCity)
+                .Include(x => x.Subjects)
+                .ThenInclude(x => x.Questionaries)
+                .ThenInclude(x => x.Exams)
+                .ToList();
         }
 
 

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using AutoMapper;
 using SchoolExams.ViewModels;
+using Newtonsoft.Json;
 
 namespace SchoolExams
 {
@@ -63,17 +64,25 @@ namespace SchoolExams
             })
             .AddEntityFrameworkStores<SchoolsContext>();
 
+            services.AddScoped<ISchoolsRepository, SchoolsRepository>();
+
             services.AddLogging();
 
             services.AddTransient<SchoolsContextSeedData>();
 
             services.AddMvc()
-                    .AddJsonOptions(config =>
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ReferenceLoopHandling =
+                      ReferenceLoopHandling.Ignore;
+                })
+                .AddJsonOptions(config =>
                                     {
 
                                         config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                                     });
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,

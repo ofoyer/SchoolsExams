@@ -14,8 +14,7 @@ using System.Threading.Tasks;
 namespace SchoolExams.Controllers
 {
 
-    
-    [Authorize]
+    [Route("api/[controller]")]
     [ValidateModel]
     public class SchoolsController : Controller
     {
@@ -30,13 +29,13 @@ namespace SchoolExams.Controllers
 
 
         [HttpGet("")]
-        [Route("api/[controller]")]
+       
         public IActionResult Get()
         {
             try
             {
-                var results = _repository.GetSchoolsByUserName(User.Identity.Name);
-
+                //var results = _repository.GetSchoolsByUserName(User.Identity.Name);
+                var results = _repository.GetAllSchools();
                 return Ok(Mapper.Map<IEnumerable<School>>(results));
 
             }
@@ -50,7 +49,6 @@ namespace SchoolExams.Controllers
         }
 
         [HttpPost("")]
-        [Route("api/[controller]/new")]
         public async Task<IActionResult> Post([FromBody]SchoolViewModel school)
         {
             try
@@ -60,7 +58,7 @@ namespace SchoolExams.Controllers
 
                 var newSchool = Mapper.Map<School>(school);
 
-                newSchool.UserName = User.Identity.Name;
+                //newSchool.UserName = User.Identity.Name;
 
                 _repository.AddSchool(newSchool);
 
@@ -84,14 +82,13 @@ namespace SchoolExams.Controllers
         }
 
 
-        [HttpGet("")]
-        [Route("api/[controller]/{schoolid}")]
-        public IActionResult GetSchoolById(int schoolid)
+        [HttpGet("{id}")]
+        public IActionResult GetSchoolById(int id)
         { 
 
             try
             {
-                var results = _repository.GetSchoolByID(schoolid);
+                var results = _repository.GetSchoolByID(id);
 
                 return Ok(Mapper.Map<School>(results));
 
@@ -104,8 +101,7 @@ namespace SchoolExams.Controllers
             }
         }
 
-        [HttpPost("")]
-        [Route("api/[controller]/{schoolid}/subjects")]
+        [HttpPost("{id}/subjects")]
         public async Task<IActionResult> AddSubjectBySchool([FromBody]SchoolViewModel school)
         {
             try

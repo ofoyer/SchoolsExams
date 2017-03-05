@@ -20,8 +20,8 @@ namespace SchoolExams.ViewModels
         [StringLength(6, MinimumLength = 6)]
         public string SchoolCode { get; set; }
 
-        [Required]
-        [StringLength(4, MinimumLength = 10)]
+        //[Required]
+        //[StringLength(4, MinimumLength = 10)]
         public string UserName { get; set; }
 
         public Models.City SchoolCity { get; set; }

@@ -238,7 +238,7 @@ namespace SchoolExams.Models
                 var schoolC = new School()
                 {
                     DateCreated = DateTime.Now,
-                    SchoolCity = new City() { CityName = "פתח תקווה" },
+                    SchoolCity = new City() { CityName = "ירושלים" },
                     SchoolName = "תפארת הרימון",
                     SchoolCode = "202948",
                     Subjects = new List<Subject>()

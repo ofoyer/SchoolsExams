@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 namespace SchoolExams.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ValidateModel]
     public class CityController:Controller
     {
@@ -31,6 +30,7 @@ namespace SchoolExams.Controllers
         {
             try
             {
+                _logger.LogInformation("Try to get all cities");
                 var results = _repository.GetAllCities();
 
                 return Ok(Mapper.Map<IEnumerable<CityViewModel>>(results));
